@@ -1,4 +1,4 @@
-###CLIENT-SERVER ARCHITECTURE
+### CLIENT-SERVER ARCHITECTURE
 Client/server architecture is a computing model in which the server hosts, delivers and manages most of the resources and services to be consumed by the client. This type of architecture has one or more client computers connected to a central server over a network or internet connection. This system shares computing resources.
 
 Client/server architecture is also known as a networking computing model or client/server network because all the requests and services are delivered over a network.
