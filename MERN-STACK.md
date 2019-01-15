@@ -11,7 +11,7 @@ The advantages of using documents are:
 + Embedded documents and arrays reduce need for expensive joins.
 + Dynamic schema supports fluent polymorphism.
 ### Key Features
-#####High Performance
+##### High Performance
 MongoDB provides high performance data persistence. In particular,
 
 + Support for embedded data models reduces I/O activity on database system.
