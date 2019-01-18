@@ -1,48 +1,22 @@
-let permissions = {
-  getUsers: {
-    all: ["head-trainer"],
-    read: ["trainee", "trainer"],
-    write: ["trainer"],
-    delete: []
-  }
-};
+import { permissions } from "../constants";
 
-function hasPermission(getUsers, role, permissionType) {
-  let {
-    getUsers: {
-      all: [a],
-      read: [b, c],
-      write: [d],
-      delete: []
-    }
-  } = permissions;
-  if (role == a) {
+export default function hasPermission(moduleName, role, permissionType) {
+  if (permissions[moduleName]) {
     if (
-      permissionType == "all" ||
-      permissionType == "write" ||
-      permissionType == "read" ||
-      permissionType == "delete"
+      permissions[moduleName][permissionType.includes(role)] ||
+      permissions[moduleName]["all"].includes[role]
     ) {
-      return console.log("True");
+      console.log(
+        `${role} have permission to ${permissionType} for the module ${moduleName}`
+      );
     } else {
-      return console.log("False");
+      console.log(
+        `${role} do not have permission to ${permissionType} for the module ${moduleName}`
+      );
     }
-  }
-  if (role == b) {
-    if (permissionType == "read") {
-      return console.log("True");
-    } else {
-      return console.log("False");
-    }
-  }
-  if (role == c) {
-    if (permissionType == "read" || permissionType == "write") {
-      return console.log("True");
-    } else {
-      return console.log("False");
-    }
+  } else {
+    console.log(
+      `${role} do not have permission to ${permissionType} for the module ${moduleName}`
+    );
   }
 }
-
-hasPermission("getUsers", "trainee", "write");
-hasPermission("getUsers", "trainee", "getUsers");
