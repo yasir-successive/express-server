@@ -1,49 +1,35 @@
-let permissions = {
-    getUsers: {
-      all: ["head-trainer"],
-      read: ["trainee", "trainer"],
-      write: ["trainer"],
-      delete: []
-    }
-  };
-  
-  function hasPermission(getUsers, role, permissionType) {
-    let {
-      getUsers: {
-        all: [a],
-        read: [b, c],
-        write: [d],
-        delete: []
-      }
-    } = permissions;
-    if (role == a) {
-      if (
-        permissionType == "all" ||
-        permissionType == "write" ||
-        permissionType == "read" ||
-        permissionType == "delete"
-      ) {
-        return console.log("True");
-      } else {
-        return console.log("False");
-      }
-    }
-    if (role == b) {
-      if (permissionType == "read") {
-        return console.log("True");
-      } else {
-        return console.log("False");
-      }
-    }
-    if (role == c) {
-      if (permissionType == "read" || permissionType == "write") {
-        return console.log("True");
-      } else {
-        return console.log("False");
-      }
-    }
+const HEAD_TRAINER = "head-trainer";
+const TRAINER = "trainer";
+const TRAINEE = "trainee";
+
+const permissions = {
+  getUsers: {
+    all: [HEAD_TRAINER],
+    read: [TRAINEE, TRAINER],
+    write: [TRAINER],
+    delete: []
   }
-  
-  hasPermission("getUsers", "trainee", "write");
-  hasPermission("getUsers", "trainee", "getUsers");
-  
+};
+function hasPermission(moduleName, role, permissionType) {
+  if (permissions[moduleName]) {
+    if (
+      permissions[moduleName][permissionType.includes(role)] ||
+      permissions[moduleName]["all"].includes[role]
+    ) {
+      console.log(
+        `${role} have permission to ${permissionType} for the module ${moduleName}`
+      );
+    } else {
+      console.log(
+        `${role} do not have permission to ${permissionType} for the module ${moduleName}`
+      );
+    }
+  } else {
+    console.log(
+      `${role} do not have permission to ${permissionType} for the module ${moduleName}`
+    );
+  }
+}
+
+hasPermission("getUsers", "trainee", "write");
+hasPermission("getUsers", "trainee", "read");
