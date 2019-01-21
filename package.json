@@ -4,9 +4,11 @@
   "description": "A app for learning",
   "main": "index.js",
   "scripts": {
-    "dev":"babel-node extra --presets env",
+    "dev": "babel-node extra --presets env",
     "pattern:diamond": "nodemon extra/patterns/diamods.js",
     "pattern:equilateral": "nodemon extra/patterns/equilateral.js",
+    "nodemon": "nodemon ./dist/index.js",
+    "extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon \"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +23,8 @@
   "homepage": "https://github.com/yasirsuccessive/express-server#readme",
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "tsc-watch": "^1.0.31",
+    "typescript": "^3.2.4"
   }
 }
