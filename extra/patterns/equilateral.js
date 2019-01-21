@@ -1,4 +1,4 @@
-function equilateral(n) {
+export default function equilateral(n) {
   console.log("triangle for", n, "row");
   let pattern = "";
   for (let i = 1; i <= n; i++) {
@@ -23,6 +23,3 @@ function equilateral(n) {
   }
   console.log(pattern);
 }
-
-equilateral(5);
-equilateral(10);
