@@ -8,7 +8,7 @@ export interface IPermissions {
         delete:string[]
     };
 }
-export interface IUsers{
+export interface IUsers {
      traineeEmail: "trainee1@successive.tech",
   reviewerEmail : "reviewer1@successive.tech"  
  };

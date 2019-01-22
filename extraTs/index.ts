@@ -2,7 +2,7 @@ import { IPermissions } from './interface';
 import { diamods, equilateral } from "./patterns";
 import { hasPermission, validateUsers } from "./utils";
 
-export let users = [
+export const users = [
   {
     traineeEmail: "trainee1@successive.tech",
     reviewerEmail: "reviewer1@successive.tech"

@@ -1,7 +1,7 @@
-import {IPermissions} from './interface';
+import { IPermissions } from './interface';
 export const HEAD_TRAINER = "head-trainer";
 export const TRAINER = "trainer";
-const TRAINEE = "trainee";
+export const TRAINEE = "trainee";
 
 export const permissions:IPermissions = {
   getUsers: {
