@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adilsuccessive/express-server.git"
+    "url": "git+https://github.com/yasirsuccessive/express-server.git"
   },
-  "author": "Mohammad Adil",
+  "author": "Mohd yasir",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adilsuccessive/express-server/issues"
+    "url": "https://github.com/yasirsuccessive/express-server/issues"
   },
-  "homepage": "https://github.com/adilsuccessive/express-server#readme"
+  "homepage": "https://github.com/yasirsuccessive/express-server#readme"
 }
