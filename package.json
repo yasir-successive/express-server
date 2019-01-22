@@ -1,6 +1,9 @@
 {
   "name": "express-server",
   "version": "1.0.0",
+  "description": "A learning app",
+  "scripts": {
+   
   "description": "A app for learning",
   "main": "index.js",
   "scripts": {
