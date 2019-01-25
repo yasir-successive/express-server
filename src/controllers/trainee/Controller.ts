@@ -1,6 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import successHandler from "../../libs/routes/successHandler";
 class TraineeController {
+  public static getInstance(instance:TraineeController){
+    if(!instance) {
+      instance=new TraineeController();
+    }
+    return instance;
+  }
   get(req: Request, res: Response) {
     const data = [
       {
@@ -60,4 +66,4 @@ class TraineeController {
   }
 }
 
-export default new TraineeController();
+export default TraineeController.getInstance(new TraineeController());
