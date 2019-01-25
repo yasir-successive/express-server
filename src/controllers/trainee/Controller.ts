@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import successHandler from "../../libs/routes/successHandler";
 class TraineeController {
-  public static getInstance(instance:TraineeController){
-    if(!instance) {
-      instance=new TraineeController();
+  public static getInstance(instance: TraineeController) {
+    if (!instance) {
+      instance = new TraineeController();
     }
     return instance;
   }
