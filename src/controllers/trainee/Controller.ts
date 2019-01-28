@@ -41,11 +41,6 @@ class TraineeController {
   }
   put(req: Request, res: Response) {
     const { name, id } = req.body;
-    if (!name) {
-      res
-        .status(400)
-        .send({ status: "Bad request", message: "name is not present" });
-    }
     if (!id) {
       res
         .status(400)
@@ -58,6 +53,7 @@ class TraineeController {
       });
   }
   delete(req: Request, res: Response) {
+    const { name, id } = req.params;
     res.status(200).send({
       status: "ok",
       message: "Successfully deleted",
