@@ -11,6 +11,15 @@ export default class Database {
           } else {
             console.log("Successful connected");
             resolve({ a: "Hello" });
+            const person = mongoose.model("person", schema1);
+      console.log(
+        new person({
+          name: "trainee",
+          age: 20,
+          EmailId: "xyz@gmail.com",
+          Address: " London 11/23 Ak house santa road,UK"
+        })
+      );
           }
         }
       );
@@ -21,15 +30,7 @@ export default class Database {
         EmailId: String,
         Address: String
       });
-      const person = mongoose.model("person", schema1);
-      console.log(
-        new person({
-          name: "trainee",
-          age: 20,
-          EmailId: "xyz@gmail.com",
-          Address: " London 11/23 Ak house santa road,UK"
-        })
-      );
+      
     });
   }
   static disconnect() {
