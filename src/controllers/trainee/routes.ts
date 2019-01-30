@@ -1,12 +1,11 @@
-import validationHandler from '../../libs/routes/validationHandler'
+import validationHandler from "../../libs/routes/validationHandler";
 import trainee from "./Controller";
 import { Router, Request, Response } from "express";
-import validation from './validation';
+import validation from "./validation";
+import { authMiddleWare } from "../../libs/routes";
 const traineeRoute: Router = Router();
-traineeRoute.get("/",validationHandler(validation.get), trainee.get);
-traineeRoute.post("/", validationHandler(validation.post), trainee.create);
-traineeRoute.put("/", validationHandler(validation.put), trainee.put);
-traineeRoute.delete("/", validationHandler(validation.delete), trainee.delete);
+traineeRoute.get("/", authMiddleWare("Trainee", "delete"), trainee.get);
+traineeRoute.post("/", authMiddleWare("TRAINEE", "read"), trainee.create);
+traineeRoute.put("/", authMiddleWare("TRAINEE", "write"), trainee.put);
+traineeRoute.delete("/", authMiddleWare("TRAINEE", "read"), trainee.delete);
 export default traineeRoute;
-
-

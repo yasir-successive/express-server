@@ -1,5 +1,5 @@
 export default config => (req, res, next) => {
-  console.log("Inside validationmiddleware", config);
+  console.log("Inside validation middleware", config);
   const keys = Object.keys(config);
   keys.forEach(key => {
     const item = config[key];
@@ -19,10 +19,9 @@ export default config => (req, res, next) => {
       } else if (isNaN(req.query.skip) && isNaN(req.query.limit)) {
         req.query.skip = 0;
         req.query.limit = 10;
-        
       }
       console.log(req.query.skip);
-        console.log(req.query.limit);
+      console.log(req.query.limit);
     }
 
     if (item && item.string) {
@@ -54,6 +53,5 @@ export default config => (req, res, next) => {
       item.custom(values);
     }
   });
-
   next();
 };
