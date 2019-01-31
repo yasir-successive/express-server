@@ -35,19 +35,19 @@ class Server {
       config: { port, mongo: mongoUrl }
     } = this;
     console.log(mongoUrl);
-    Database.open(mongoUrl).then(res =>
-      {app.listen (port,err =>
-      {
-        if(err)
-        {
-          throw err;
-        }
-        console.log(res);
-        console.log(`app is running on ${port}`);
-        Database.disconnect();
-      }
-      );
-    }).catch(result =>{console.log(result)});
+    Database.open(mongoUrl)
+      .then(res => {
+        app.listen(port, err => {
+          if (err) {
+            throw err;
+          }
+          console.log(res);
+          console.log(`app is running on ${port}`);
+        });
+      })
+      .catch(result => {
+        console.log(result);
+      });
   }
 }
 export default Server;

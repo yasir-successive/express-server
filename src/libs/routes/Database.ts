@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import seedData from "../seedData";
 export default class Database {
   static open(mongoUrl) {
     return new Promise((resolve, reject) => {
@@ -11,26 +12,10 @@ export default class Database {
           } else {
             console.log("Successful connected");
             resolve({ a: "Hello" });
-            const person = mongoose.model("person", schema1);
-      console.log(
-        new person({
-          name: "trainee",
-          age: 20,
-          EmailId: "xyz@gmail.com",
-          Address: " London 11/23 Ak house santa road,UK"
-        })
-      );
+            seedData();
           }
         }
       );
-
-      const schema1 = new mongoose.Schema({
-        name: String,
-        age: Number,
-        EmailId: String,
-        Address: String
-      });
-      
     });
   }
   static disconnect() {
