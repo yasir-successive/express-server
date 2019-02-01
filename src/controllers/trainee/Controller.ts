@@ -17,8 +17,10 @@ class TraineeController {
       }
     ];
     res.status(200);
-
-    res.send(successHandler("message", data));
+    const showData = req.body.userDetail;
+    console.log(showData);
+    
+    res.send(successHandler("message","200", showData));
     console.log("Inside get method");
   }
   create(req: Request, res: Response) {
