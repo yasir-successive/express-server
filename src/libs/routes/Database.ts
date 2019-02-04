@@ -1,25 +1,26 @@
-import * as mongoose from "mongoose";
-import seedData from "../seedData";
+import * as mongoose from 'mongoose';
+import seedData from '../seedData';
 export default class Database {
-  static open(mongoUrl) {
+ public static open(mongoUrl) {
     return new Promise((resolve, reject) => {
       mongoose.connect(
         mongoUrl,
         { useNewUrlParser: true },
-        err => {
+        (err) => {
           if (err) {
-            reject("Error occured");
+            reject('Error occured');
+            console.log('err');
           } else {
-            console.log("Successful connected");
-            resolve({ a: "Hello" });
+            console.log('Successful connected');
+            resolve({ a: ' Hello '});
             seedData();
           }
-        }
+        },
       );
     });
   }
-  static disconnect() {
+  public static disconnect() {
     mongoose.disconnect();
-    console.log("Disconnect");
+    console.log('Disconnect');
   }
 }

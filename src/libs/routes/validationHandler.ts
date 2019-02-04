@@ -1,20 +1,20 @@
-export default config => (req, res, next) => {
-  console.log("Inside validation middleware", config);
+export default (config) => (req, res, next) => {
+  console.log('Inside validation middleware', config);
   const keys = Object.keys(config);
-  keys.forEach(key => {
+  keys.forEach((key) => {
     const item = config[key];
-    console.log("the item is", keys);
-    const values = item.in.map(item => {
+    console.log('the item is', keys);
+    const values = item.in.map((item1) => {
       return req[item][key];
     });
-    console.log("values are", values);
+    console.log('values are', values);
     if (item && item.required) {
-      const validatedValues = values.filter(item => item);
+      const validatedValues = values.filter((item2) => item);
 
       if (validatedValues.length !== values.length) {
         next({
           message: `${key} is required` || item.errorMessage,
-          status: 400
+          status: 400,
         });
       } else if (isNaN(req.query.skip) && isNaN(req.query.limit)) {
         req.query.skip = 0;
@@ -25,13 +25,13 @@ export default config => (req, res, next) => {
     }
 
     if (item && item.string) {
-      const validatedValues = values.filter(item => item);
-      if (typeof validatedValues[0] != "string") {
+      const validatedValues = values.filter((item3) => item);
+      if (typeof validatedValues[0] !== 'string') {
         next({ message: `${key} is not a string`, status: 400 });
       }
     }
     if (item && item.regex) {
-      const validatedValues = values.filter(item => item);
+      const validatedValues = values.filter((item4) => item);
       const regex = item.regex;
       if (!regex.test(validatedValues[0])) {
         next({ message: `${key} is not valid`, status: 400 });
@@ -44,8 +44,8 @@ export default config => (req, res, next) => {
     //   }
     // }
     if (item && item.isObject) {
-      const validatedValues = values.filter(item => item);
-      if (typeof validatedValues[0] != "object") {
+      const validatedValues = values.filter((item5) => item);
+      if (typeof validatedValues[0] !== 'object') {
         next({ message: `${key} must be object`, status: 400 });
       }
     }

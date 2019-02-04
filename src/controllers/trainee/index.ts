@@ -1,1 +1,1 @@
-export  { default as traineeRoute} from "./routes" 
+export  { default as traineeRoute} from './routes';

@@ -1,3 +1,3 @@
-export default function successHandler(message: string,status:any, data: any) {
-  return { name: message,status:status, data: data };
+export default function successHandler(message: string, status: any, data: any) {
+  return { name: message, status, data };
 }
