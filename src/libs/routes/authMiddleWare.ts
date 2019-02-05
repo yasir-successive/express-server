@@ -1,26 +1,42 @@
-import { permissions } from "./../constants";
-import * as jwt from "jsonwebtoken";
-import { default as hasPermission } from "./permissions";
-export default (module, permissionType) => (req, res, next) => {
-  console.log("Inside middleware", module, permissionType);
-  const token = req.header("Authorization");
-  console.log("Token is", token);
-  try {
-    let decoded = jwt.verify(token, process.env.key);
-    console.log(decoded);
-    const role = decoded.role;
-    if (hasPermission(module, role, permissionType)) {
-      console.log(module, "has permission to", permissionType);
-    } else {
-      next({ status: 401, message: "wrong permission" });
-    }
-  } catch (err) {
-    return next({
-      message: " Unauthorized Acces",
-      status: 403,
-      error: "Not found"
-    });
-  }
+import * as jwt from 'jsonwebtoken';
+import UserRepository from './../../repositories/user/UserRepository';
+import hasPermission from './permissions';
 
-  next();
+export default (module, permissionType) => (req, res, next) => {
+  const token = req.header('Authorization');
+  // console.log(token);
+
+  // try {
+  //   const user = jwt.verify(token, process.env.key);
+  //   if (hasPermission(module, user.role, permissionType)) {
+  //     console.log(module, "has permission to", permissionType);
+  //   } else {
+  //     next({ status: 401, message: "Wrong Permission" });
+  //   }
+  // } catch (err) {
+  //   next({ status: 403, message: "Unauthorized Access" });
+  // }
+  // })
+  const repository = new UserRepository();
+  try {
+  const user = jwt.verify(token, process.env.key);
+  const { _id } = user;
+  repository.findone({ _id }).then((result) => {
+    if (result.name !== module ) {
+      next({
+        error: 'Unauthorized Access',
+        message: 'User not match',
+        status: 403,
+      });
+    } else if (!hasPermission(module, result.role, permissionType)) {
+      next({ status: 401, message: 'Wrong Permission' });
+    } else {
+      req.body = result.id;
+      next();
+    }
+  });
+} catch (err) {
+  next({ status: 403, message: 'Unauthorized Access'});
+}
+
 };

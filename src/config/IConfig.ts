@@ -1,4 +1,5 @@
 export interface IConfig {
   port: string;
-  mongo:string;
+  node_env?: string;
+  mongo_url: string;
 }

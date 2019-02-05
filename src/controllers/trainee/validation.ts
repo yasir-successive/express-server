@@ -1,55 +1,57 @@
 const validation = {
-  post: {
+  create: {
     id: {
+      in: ['body'],
       required: true,
       string: true,
-      in: ["body"],
-      custom: function(value) {
-        console.log("Value", value);
-      }
+      custom(value) {
+        console.log('Value', value);
+      },
     },
     name: {
+      errorMessage: 'Name is required',
+      in: ['body'],
+      regex: /^[A-Za-z]{2,30}$/,
       required: true,
-      regex: /^[a-zA-Z ]{2,30}$/,
-      in: ["body"],
-      errorMessage: "Name is required"
-    }
+    },
   },
   delete: {
     id: {
+      errorMessage: 'Id is required',
+      in: ['params'],
       required: true,
-      errorMessage: "Id is required",
-      in: ["params"]
-    }
+    },
   },
   get: {
-    skip: {
-      required: false,
-      default: 0,
-      number: true,
-      in: ["query"],
-      errorMessage: "Skip is invalid"
-    },
     limit: {
-      required: false,
       default: 10,
+      errorMessage: 'Limit is invalid',
+      in: ['query'],
       number: true,
-      in: ["query"],
-      errorMessage: "Limit is invalid"
-    }
+      required: false,
+    },
+    skip: {
+      default: 0,
+      errorMessage: 'Skip is invalid',
+      in: ['query'],
+      number: true,
+      required: false,
+    },
   },
-  put: {
+  update: {
+    dataToUpdate: {
+      in: ['body'],
+      isObject: true,
+      required: true,
+      custom(dataToUpdate) {
+        console.log('customFn', dataToUpdate);
+      },
+    },
     id: {
+      in: ['body'],
       required: true,
       string: true,
-      in: ["body"]
     },
-    dataToUpdate: {
-      in: ["body"],
-      required: true,
-      isObject: true,
-      custom: function(dataToUpdate) {}
-    }
-  }
+  },
 };
 export default validation;

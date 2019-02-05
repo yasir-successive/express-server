@@ -1,11 +1,8 @@
-import { permissions } from "./constants";
-import { TRAINEE } from "./constants";
 export interface IPermissions {
-  [TRAINEE: string]: {
+  [trainee: string]: {
     all: string[];
     read: string[];
     write: string[];
     delete: string[];
   };
-
 }

@@ -1,5 +1,6 @@
-import config from "./config/configuration";
-import Server from "./server";
-console.log("Inside config", config);
-const server = new Server(config);
-server.bootstrap().run();
+
+import configuration from './config/configuration';
+import Server from './server';
+const server = new Server(configuration);
+server.bootstrap();
+server.run();
