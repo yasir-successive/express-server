@@ -1,50 +1,26 @@
 import * as mongoose from 'mongoose';
+import VersionRepository from '../versionable/VersionableRepository';
 import IUserModel from './IUserModel';
 import { userModel } from './UserModel';
-export default class UserRepository {
-  public static generateObjectId() {
-    console.log(mongoose.Types.ObjectId());
-    return String(mongoose.Types.ObjectId());
-  }
-  private model: mongoose.Model<IUserModel>;
+// const versionRepository = new VersionRepository(userModel);
+export default class UserRepository extends VersionRepository<IUserModel, mongoose.Model<IUserModel>> {
   constructor() {
-    this.model = userModel;
+    super(userModel);
   }
-  public createUser(data: any): Promise<IUserModel> {
-    return this.model.create({
-      ...data,
-      _id: UserRepository.generateObjectId(),
-    });
+  public createUser(data) {
+    console.log('-------', data);
+    return super.createUser(data);
   }
-  public delete(data) {
-    return this.model.deleteMany(data, (err) => {
-        if (err) {
-            console.log('Error');
-        }
-    });
+  public updateData(oldData, newData) {
+    return super.updateUser(oldData, newData);
   }
-  public updateUser(oldData, newData) {
-    return this.model.updateOne(
-      { name: oldData },
-      { name: newData },
-      (err) => {
-          if (err) {
-              console.log('Error');
-          }
-      },
-    );
+  public deleteData(data) {
+    return super.deleteUser(data);
   }
-  public getUser(data) {
-    return this.model.findById(data, (err) => {
-        if (err) {
-            console.log('err');
-        }
-    });
+  public findData(data) {
+    return super.findUser(data);
   }
-  public count() {
-    return this.model.count({});
-  }
-  public findone(query) {
-    return this.model.findOne(query);
+  public countData( ) {
+    return super.count( );
   }
 }

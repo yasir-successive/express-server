@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import { userModel } from './../../repositories/user/UserModel';
 import UserRepository from './../../repositories/user/UserRepository';
 import hasPermission from './permissions';
 
@@ -21,7 +22,7 @@ export default (module, permissionType) => (req, res, next) => {
   try {
   const user = jwt.verify(token, process.env.key);
   const { _id } = user;
-  repository.findone({ _id }).then((result) => {
+  repository.findData({ _id }).then((result) => {
     if (result.name !== module ) {
       next({
         error: 'Unauthorized Access',
