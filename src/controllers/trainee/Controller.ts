@@ -1,68 +1,63 @@
 import { NextFunction, Request, Response } from 'express';
-import successHandler from '../../libs/routes/successHandler';
+import { successHandler } from '../../libs/routes';
 class TraineeController {
-  public static getInstance(instance: TraineeController) {
-    if (!instance) {
-      instance = new TraineeController();
-    }
-    return instance;
-  }
-  public get(req: Request, res: Response) {
+  public get(req, res) {
     const data = [
       {
-        name: 'trainee',
+        name: 'trainee1',
       },
       {
         name: 'trainee2',
       },
     ];
-    const showData = req.body.userDetail;
-    res.status(200);
+    res.status(200).send(successHandler('User Data', 200, data));
+  }
+  public post(req: Request, res: Response, next: NextFunction) {
+    const { name, id } = req.body;
+    if (!name || !id) {
+      const filed = !name ? 'Name' : 'Id';
+      return next({
+        error: 'Bad request',
+        message: `${filed} Not Found`,
+        status: 400,
+      });
+    }
 
-    res.send(successHandler('message', '200', showData));
-    console.log('Inside get method');
+    res
+      .status(200)
+      .send(successHandler('Successfully created trainee', 200, { name, id }));
   }
-  public create(req: Request, res: Response) {
+  public put(req: Request, res: Response, next: NextFunction) {
+    const data = {
+      id: '3',
+      name: 'trainee3',
+    };
     const { name, id } = req.body;
-    if (!name) {
-      res
-        .status(400)
-        .send({ status: 'Bad request', message: 'name is not present' });
-    }
-    if (!id) {
-      res
-        .status(400)
-        .send({ status: 'Bad request', message: 'ID is not present' });
-    } else {
-      res.status(200).send({
-        data: { name, id },
-        message: 'Successfully Created',
-        status: 'ok',
+    if (id !== data.id) {
+      return next({
+        error: 'Bad request',
+        message: 'id not found',
+        status: 400,
       });
     }
+    data.name = name;
+    res.status(200).send(successHandler('Updated Trainee', 200, data));
   }
-  public put(req: Request, res: Response) {
-    const { name, id } = req.body;
-    if (!id) {
-      res
-        .status(400)
-        .send({ status: 'Bad request', message: 'ID is not present' });
-    } else {
-      res.status(200).send({
-        data: { name, id },
-        message: 'Successfully Updated',
-        status: 'ok',
+  public delete(req: Request, res: Response, next: NextFunction) {
+    const data = {
+      id: '4',
+      name: 'trainee4',
+    };
+    const id = req.params.id;
+    if (id !== data.id) {
+      return next({
+        error: 'Bad request',
+        message: 'id not found',
+        status: 400,
       });
     }
-  }
-  public delete(req: Request, res: Response) {
-    const { name, id } = req.params;
-    res.status(200).send({
-      data: 'null',
-      message: 'Successfully deleted',
-      status: 'ok',
-    });
+    res.status(200).send(successHandler('Deleted Trainee', 200, data));
   }
 }
 
-export default TraineeController.getInstance(new TraineeController());
+export default new TraineeController();

@@ -1,5 +1,5 @@
 export default function errorHandler(err, req, res, next) {
-  const ts = new Date();
+  const ts: Date = new Date();
   const { error, status, message } = err;
 
   res.status(status).json({

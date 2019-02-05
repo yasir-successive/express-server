@@ -1,4 +1,3 @@
 export default function notFoundRoute(req, res, next) {
-    console.log(' Inside the notFoundRoute ');
-    next({ Error : 'not Found' });
+    next({error : 'Not Found', status: 404, message: 'Route Not Found'});
 }

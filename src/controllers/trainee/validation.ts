@@ -1,5 +1,5 @@
 const validation = {
-  post: {
+  create: {
     id: {
       in: ['body'],
       required: true,
@@ -11,11 +11,17 @@ const validation = {
     name: {
       errorMessage: 'Name is required',
       in: ['body'],
-      regex: /^[a-zA-Z ]{2,30}$/,
+      regex: /^[A-Za-z]{2,30}$/,
       required: true,
     },
   },
-
+  delete: {
+    id: {
+      errorMessage: 'Id is required',
+      in: ['params'],
+      required: true,
+    },
+  },
   get: {
     limit: {
       default: 10,
@@ -26,18 +32,20 @@ const validation = {
     },
     skip: {
       default: 0,
-      errorMessage: 'Limit is invalid',
+      errorMessage: 'Skip is invalid',
       in: ['query'],
       number: true,
       required: false,
     },
   },
-  put: {
+  update: {
     dataToUpdate: {
-      custom: ('{function(dataToUpdate)}'),
       in: ['body'],
       isObject: true,
       required: true,
+      custom(dataToUpdate) {
+        console.log('customFn', dataToUpdate);
+      },
     },
     id: {
       in: ['body'],

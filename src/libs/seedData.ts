@@ -1,18 +1,19 @@
-import userRepository from './../repositories/user/UserRepository';
-export default function seedData() {
-  console.log('inside the seed function');
-  const repository = new userRepository();
-  const userRepo = new userRepository();
-  userRepo.countData().then((data) => {
-    if ( data === 0) {
-        userRepo.createUser({name: ' head-trainee ', role: ' trainer', email: 'head.trainer@gmail.com'})
-        .then((data1) => console.log('user1 created'));
-        userRepo.createUser( {name: ' head-trainee ', role: 'trainer' , email: 'head.trainer@gmail.com' })
-        .then ( (data2) => console.log( 'user2 created' ) );
-      }
-      else {
-        console.log('initial user created');
-      }
-    });
+import UserRepository from '../repositories/user/UserRepository';
 
+export default function seedData() {
+  const user = new UserRepository();
+  user.count().then((res) => {
+    if (res === 0) {
+      user.createUser({
+        email: 'head.trainee@successive.tech',
+        name: 'HEAD-TRAINEE',
+        role: 'Head-Trainee',
+      });
+      user.createUser({
+        email: 'trainee@successive.tech',
+        name: 'TRAINEE',
+        role: 'trainee',
+      });
+    }
+  });
 }
