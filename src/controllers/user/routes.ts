@@ -6,6 +6,6 @@ const user = new UserController();
 export const userRouter = express.Router();
 userRouter
 .get('/', authMiddleWare('TRAINEE', 'read'), user.get)
-.post('/', authMiddleWare('TRAINEE', 'read'), user.post)
+.post('/', authMiddleWare('TRAINEE', 'write'), user.post)
   .put('/', authMiddleWare('TRAINEE', 'read'), user.put)
   .delete('/:id', authMiddleWare('TRAINEE', 'read'), user.delete);

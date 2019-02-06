@@ -23,10 +23,11 @@ export default class UserController {
     }
   }
   public put(req: Request, res: Response) {
-    const { oldName, newName } = req.query;
+    const { id1, name1 } = req.query;
     const user = new UserRepository();
-    user.updateUser(oldName, newName).then((data) => {
+    user.updateUser({ _id: id1, name: name1}).then((data) => {
       res.status(200).send(successHandler('USer Updated', 200, data));
+      console.log('User Updated ');
     });
   }
   public delete(req: Request, res: Response) {
