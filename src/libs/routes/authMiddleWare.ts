@@ -1,28 +1,19 @@
 import * as jwt from 'jsonwebtoken';
+import { userModel } from './../../repositories/user/UserModel';
 import UserRepository from './../../repositories/user/UserRepository';
 import hasPermission from './permissions';
 
-export default (module, permissionType) => (req, res, next) => {
+export default (
+  module, permissionType) => (req, res, next) => {
   const token = req.header('Authorization');
-  // console.log(token);
-
-  // try {
-  //   const user = jwt.verify(token, process.env.key);
-  //   if (hasPermission(module, user.role, permissionType)) {
-  //     console.log(module, "has permission to", permissionType);
-  //   } else {
-  //     next({ status: 401, message: "Wrong Permission" });
-  //   }
-  // } catch (err) {
-  //   next({ status: 403, message: "Unauthorized Access" });
-  // }
-  // })
+  console.log(token);
   const repository = new UserRepository();
   try {
   const user = jwt.verify(token, process.env.key);
   const { _id } = user;
-  repository.findone({ _id }).then((result) => {
-    if (result.name !== module ) {
+  console.log('id is ----', _id);
+  repository.findData({ _id }).then((result) => {
+    if (!result.name) {
       next({
         error: 'Unauthorized Access',
         message: 'User not match',
@@ -34,7 +25,8 @@ export default (module, permissionType) => (req, res, next) => {
       req.body = result.id;
       next();
     }
-  });
+  })
+  .catch((err) => console.log('inside catch error ----', err));
 } catch (err) {
   next({ status: 403, message: 'Unauthorized Access'});
 }

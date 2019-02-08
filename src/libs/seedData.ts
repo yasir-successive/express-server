@@ -1,8 +1,8 @@
 import UserRepository from '../repositories/user/UserRepository';
-
+import { userModel } from './../repositories/user/UserModel';
 export default function seedData() {
   const user = new UserRepository();
-  user.count().then((res) => {
+  user.countData().then((res) => {
     if (res === 0) {
       user.createUser({
         email: 'head.trainee@successive.tech',
@@ -15,5 +15,9 @@ export default function seedData() {
         role: 'trainee',
       });
     }
+  });
+  const emailid = 'head.trainee@successive.tech';
+  user.findData({email: emailid}).then((result) => {
+    console.log(result);
   });
 }
