@@ -10,7 +10,7 @@ class Database {
         )
         .then(() => {
           seedData();
-          console.log('successfully connected ');
+          console.log('Successfully connected to the Database........................... ');
           resolve();
         })
         .catch((err) => {

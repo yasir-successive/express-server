@@ -31,11 +31,6 @@ export default (config) => (req, res, next) => {
           next({ message: `${key} must be an object`, status: 400 });
         }
       }
-      //  if(item.number) {
-      //      if(typeof validatedValues[0] !='number'){
-      //          next({message: `${key} must be a number`, status: 400})
-      //      }
-      //  }
       if (item.custom) {
         item.custom(values);
       }
