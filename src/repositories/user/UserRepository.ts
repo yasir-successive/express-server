@@ -1,25 +1,21 @@
 import * as mongoose from 'mongoose';
 import VersionRepository from '../versionable/VersionableRepository';
 import IUserModel from './IUserModel';
-import { userModel } from './UserModel';
-export default class UserRepository extends VersionRepository<IUserModel, mongoose.Model<IUserModel>> {
-  constructor() {
-    super(userModel);
-  }
-  public createUser(data) {
-    console.log('User Created');
-    return super.createUser(data);
+
+export default class UserRepository extends VersionRepository <IUserModel, mongoose.Model<IUserModel>> {
+  public createUsers(data: any) {
+    return this.createUser(data);
   }
   public updateData(data) {
-    return super.updateUser(data);
+      return super.updateUser(data);
   }
   public deleteData(data) {
-    return super.deleteUser(data);
+      return super.delete(data);
   }
   public findData(data) {
-    return super.findUser(data);
+      return this.findOne(data);
   }
-  public countData( ) {
-    return super.count( );
+  public countData() {
+      return super.count();
   }
 }

@@ -1,6 +1,6 @@
-const HEAD_TRAINER = "head-trainer";
-const TRAINER = "trainer";
-const TRAINEE = "trainee";
+const HEAD_TRAINER = 'head-trainer';
+const TRAINER = 'trainer';
+const TRAINEE = 'trainee';
 
 export const permissions = {
   getUsers: {

@@ -1,23 +1,24 @@
+import * as bcrypt from 'bcrypt';
 import UserRepository from '../repositories/user/UserRepository';
 import { userModel } from './../repositories/user/UserModel';
-export default function seedData() {
-  const user = new UserRepository();
+export default  async function seedData() {
+  const saltRounds = 10;
+  const user = new UserRepository(userModel);
+  const pass = await bcrypt.hash(process.env.PASSWORD, saltRounds);
   user.countData().then((res) => {
     if (res === 0) {
       user.createUser({
         email: 'head.trainee@successive.tech',
         name: 'HEAD-TRAINEE',
+        password: pass,
         role: 'Head-Trainee',
       });
       user.createUser({
         email: 'trainee@successive.tech',
         name: 'TRAINEE',
+        password: pass,
         role: 'trainee',
       });
     }
-  });
-  const emailid = 'head.trainee@successive.tech';
-  user.findData({email: emailid}).then((result) => {
-    console.log(result);
   });
 }
